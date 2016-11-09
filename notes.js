@@ -10,10 +10,53 @@ const Note = React.createClass({
     }
 });
 
+const NoteColorPicker = React.createClass({
+    getInitialState: function () {
+        return {
+            colors: [
+                {
+                    id: '0',
+                    color: 'yellow'
+                },
+                {
+                    id: '1',
+                    color: 'ted'
+                },
+                {
+                    id: '2',
+                    color: 'green'
+                }]
+        }
+    },
+    handleColorChange: function (event) {
+        this.props.onColorChange(event.target.value);
+    },
+    render: function () {
+        const handleColorChange = this.handleColorChange;
+        return (
+            <div>
+                {
+                    this.state.colors.map(function (color) {
+                        return <input
+                                    key={color.id}
+                                    type="radio"
+                                    name="color"
+                                    value={color.color}
+                                    onClick={handleColorChange}
+                               />
+                    })
+                }
+
+            </div>
+        );
+    }
+});
+
 const NoteEditor = React.createClass({
     getInitialState: function () {
         return {
-            text: ''
+            text: '',
+            color: 'yellow'
         }
     },
     handleTextChange: function (event) {
@@ -22,13 +65,16 @@ const NoteEditor = React.createClass({
     handleNoteAdd: function () {
         const newNote = {
             text: this.state.text,
-            color: randomColor({luminosity: 'light'}),
+            color: this.state.color,
             id: Date.now()
         };
 
         this.props.onNoteAdd(newNote);
 
         this.setState({ text: '' });
+    },
+    handleColorChange: function (color) {
+        this.setState({ color: color })
     },
     render: function () {
         return (
@@ -40,6 +86,7 @@ const NoteEditor = React.createClass({
                     value={this.state.text}
                     onChange={this.handleTextChange}
                 />
+                <NoteColorPicker onColorChange={this.handleColorChange}/>
                 <button className="add-button" onClick={this.handleNoteAdd}>Add</button>
             </div>
         );
