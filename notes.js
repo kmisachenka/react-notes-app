@@ -13,15 +13,14 @@ class Note extends React.Component {
 class NoteColorPicker extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { colors: [{  id: '0', color: 'yellow', }, { id: '1', color: 'red' }, { id: '2', color: 'green' }]
-    }
-
+        this.state = { colors: [{  id: '0', color: 'yellow' }, { id: '1', color: 'red' }, { id: '2', color: 'green' }] };
+        this.handleColorChange = this.handleColorChange.bind(this);
     }
     handleColorChange(event) {
         this.props.onColorChange(event.target.value);
     }
     render() {
-        const handleColorChange = this.handleColorChange;
+        const that = this;
         return (
             <div>
                 {
@@ -31,7 +30,7 @@ class NoteColorPicker extends React.Component {
                             type="radio"
                             name="color"
                             value={color.color}
-                            onClick={handleColorChange}
+                            onClick={that.handleColorChange}
                         />
                     })
                 }
@@ -45,7 +44,11 @@ class NoteColorPicker extends React.Component {
 class NoteEditor extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { text: '', color: 'yellow', errorText: '' }
+        this.state = { text: '', color: 'yellow', errorText: '' };
+        this.handleTextChange = this.handleTextChange.bind(this);
+        this.handleNoteAdd = this.handleNoteAdd.bind(this);
+        this.handleColorChange = this.handleColorChange.bind(this);
+        this.throwError = this.throwError.bind(this);
     }
     handleTextChange(event) {
         this.setState({ errorText: '', text: event.target.value });
@@ -55,15 +58,12 @@ class NoteEditor extends React.Component {
             this.throwError('Note message cannot be empty');
             return;
         }
-
         const newNote = {
             text: this.state.text,
             color: this.state.color,
             id: Date.now()
         };
-
         this.props.onNoteAdd(newNote);
-
         this.setState({text: ''});
     }
     handleColorChange(color) {
@@ -129,6 +129,8 @@ class NotesApp extends React.Component {
     constructor(props) {
         super(props);
         this.state = { notes: [] };
+        this.handleNoteAdd = this.handleNoteAdd.bind(this);
+        this.handleNoteDelete = this.handleNoteDelete.bind(this);
     }
     componentDidMount() {
         const localNotes = JSON.parse(localStorage.getItem('notes'));
