@@ -26,12 +26,12 @@ class NoteColorPicker extends React.Component {
                 {
                     this.state.colors.map(function (color) {
                         return <input
-                            key={color.id}
-                            type="radio"
-                            name="color"
-                            value={color.color}
-                            onClick={that.handleColorChange}
-                        />
+                                    key={color.id}
+                                    type="radio"
+                                    name="color"
+                                    value={color.color}
+                                    onClick={that.handleColorChange}
+                               />
                     })
                 }
 
@@ -39,7 +39,6 @@ class NoteColorPicker extends React.Component {
         );
     }
 }
-
 
 class NoteEditor extends React.Component {
     constructor(props) {
@@ -55,7 +54,7 @@ class NoteEditor extends React.Component {
     }
     handleNoteAdd() {
         if (this.state.text.trim() === '') {
-            this.throwError('Note message cannot be empty');
+            this.throwError('Note text cannot be empty');
             return;
         }
         const newNote = {
@@ -70,7 +69,7 @@ class NoteEditor extends React.Component {
         this.setState({ color: color })
     }
     throwError(errorText) {
-        this.setState({ errorText: errorText });
+        noty({text: errorText,  layout: 'topCenter', theme: 'relax', type: 'error', timeout: 1500, maxVisible: 1});
     }
     render() {
         return (
@@ -84,7 +83,6 @@ class NoteEditor extends React.Component {
                 />
                 <NoteColorPicker onColorChange={this.handleColorChange}/>
                 <button className="add-button" onClick={this.handleNoteAdd}>Add</button>
-                <div className="note-error">{this.state.errorText}</div>
             </div>
         );
     }

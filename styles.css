@@ -37,7 +37,6 @@ body {
     transition: box-shadow .3s;
     white-space: pre-wrap;
     white-space: -moz-pre-wrap;
-    white-space: -pre-wrap;
     white-space: -o-pre-wrap;
     word-wrap: break-word;
 }
@@ -57,12 +56,6 @@ body {
 
 .note:hover .delete-note {
     display: block;
-}
-
-.note-error {
-    color: crimson;
-    font-size: 14px;
-    display: flex;
 }
 
 .note-editor {
