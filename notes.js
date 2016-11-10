@@ -1,5 +1,5 @@
-const Note = React.createClass({
-    render: function () {
+class Note extends React.Component {
+    render () {
         const style = { backgroundColor: this.props.color };
         return (
             <div className="note" style={style}>
@@ -8,61 +8,54 @@ const Note = React.createClass({
             </div>
         );
     }
-});
+}
 
-const NoteColorPicker = React.createClass({
-    getInitialState: function () {
-        return {
-            colors: [
-                {
-                    id: '0',
-                    color: 'yellow'
-                },
-                {
-                    id: '1',
-                    color: 'ted'
-                },
-                {
-                    id: '2',
-                    color: 'green'
-                }]
-        }
-    },
-    handleColorChange: function (event) {
+class NoteColorPicker extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { colors: [{  id: '0', color: 'yellow', }, { id: '1', color: 'red' }, { id: '2', color: 'green' }]
+    }
+
+    }
+    handleColorChange(event) {
         this.props.onColorChange(event.target.value);
-    },
-    render: function () {
+    }
+    render() {
         const handleColorChange = this.handleColorChange;
         return (
             <div>
                 {
                     this.state.colors.map(function (color) {
                         return <input
-                                    key={color.id}
-                                    type="radio"
-                                    name="color"
-                                    value={color.color}
-                                    onClick={handleColorChange}
-                               />
+                            key={color.id}
+                            type="radio"
+                            name="color"
+                            value={color.color}
+                            onClick={handleColorChange}
+                        />
                     })
                 }
 
             </div>
         );
     }
-});
+}
 
-const NoteEditor = React.createClass({
-    getInitialState: function () {
-        return {
-            text: '',
-            color: 'yellow'
+
+class NoteEditor extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { text: '', color: 'yellow', errorText: '' }
+    }
+    handleTextChange(event) {
+        this.setState({ errorText: '', text: event.target.value });
+    }
+    handleNoteAdd() {
+        if (this.state.text.trim() === '') {
+            this.throwError('Note message cannot be empty');
+            return;
         }
-    },
-    handleTextChange: function (event) {
-        this.setState({ text: event.target.value });
-    },
-    handleNoteAdd: function () {
+
         const newNote = {
             text: this.state.text,
             color: this.state.color,
@@ -71,12 +64,15 @@ const NoteEditor = React.createClass({
 
         this.props.onNoteAdd(newNote);
 
-        this.setState({ text: '' });
-    },
-    handleColorChange: function (color) {
+        this.setState({text: ''});
+    }
+    handleColorChange(color) {
         this.setState({ color: color })
-    },
-    render: function () {
+    }
+    throwError(errorText) {
+        this.setState({ errorText: errorText });
+    }
+    render() {
         return (
             <div className="note-editor">
                 <textarea
@@ -88,13 +84,14 @@ const NoteEditor = React.createClass({
                 />
                 <NoteColorPicker onColorChange={this.handleColorChange}/>
                 <button className="add-button" onClick={this.handleNoteAdd}>Add</button>
+                <div className="note-error">{this.state.errorText}</div>
             </div>
         );
     }
-});
+}
 
-const NotesGrid = React.createClass({
-    componentDidMount: function () {
+class NotesGrid extends React.Component {
+    componentDidMount() {
         const grid = this.refs.grid;
         this.msnry = new Masonry(grid, {
             itemSelector: '.note',
@@ -102,14 +99,14 @@ const NotesGrid = React.createClass({
             gutter: 10,
             isFitWidth: true
         });
-    },
-    componentDidUpdate: function(prevProps) {
+    }
+    componentDidUpdate(prevProps) {
         if (this.props.notes.length !== prevProps.notes.length) {
             this.msnry.reloadItems();
             this.msnry.layout();
         }
-    },
-    render: function () {
+    }
+    render() {
         const onDelete = this.props.onDelete;
         return (
             <div className="notes-grid" ref="grid">
@@ -126,36 +123,35 @@ const NotesGrid = React.createClass({
             </div>
         );
     }
-});
+}
 
-const NotesApp = React.createClass({
-    getInitialState: function () {
-        return {
-            notes: []
-        };
-    },
-    componentDidMount: function () {
+class NotesApp extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { notes: [] };
+    }
+    componentDidMount() {
         const localNotes = JSON.parse(localStorage.getItem('notes'));
         if (localNotes) {
             this.setState({ notes : localNotes });
         }
-    },
-    handleNoteAdd: function (newNote) {
+    }
+    handleNoteAdd(newNote) {
         const newNotes = this.state.notes.slice();
         newNotes.unshift(newNote);
         this.setState({ notes: newNotes });
-    },
-    handleNoteDelete: function (note) {
+    }
+    handleNoteDelete(note) {
         const noteId = note.id;
         const newNotes = this.state.notes.filter(function (note) {
             return note.id !== noteId;
         });
         this.setState({ notes: newNotes });
-    },
-    componentDidUpdate: function () {
+    }
+    componentDidUpdate() {
         this._updateLocalStorage()
-    },
-    render: function () {
+    }
+    render() {
         return (
             <div className="notes-app">
                 <h2 className="app-header">NotesApp</h2>
@@ -163,12 +159,12 @@ const NotesApp = React.createClass({
                 <NotesGrid onDelete={this.handleNoteDelete} notes={this.state.notes} />
             </div>
         );
-    },
-    _updateLocalStorage: function () {
+    }
+    _updateLocalStorage() {
         const notes = JSON.stringify(this.state.notes);
         localStorage.setItem('notes', notes);
     }
-});
+}
 
 ReactDOM.render(
     <NotesApp />,

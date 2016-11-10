@@ -3,7 +3,7 @@
 }
 
 body {
-    font-family: sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-weight: 300;
     background-color: #eaeaea;
 }
@@ -57,6 +57,12 @@ body {
 
 .note:hover .delete-note {
     display: block;
+}
+
+.note-error {
+    color: crimson;
+    font-size: 14px;
+    display: flex;
 }
 
 .note-editor {
