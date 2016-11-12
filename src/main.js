@@ -3,6 +3,6 @@ import ReactDOM from 'react-dom'
 import NotesApp from './components/NotesApp.jsx'
 
 ReactDOM.render(
-    <NotesApp />,
-    document.getElementById("mount-point")
+  <NotesApp />,
+  document.getElementById("mount-point")
 );
