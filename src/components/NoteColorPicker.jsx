@@ -2,6 +2,11 @@ import React from 'react'
 import './NoteColorPicker.css'
 
 class NoteColorPicker extends React.Component {
+
+  static propTypes = {
+    onColorChange: React.PropTypes.func.isRequired
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -36,6 +41,7 @@ class NoteColorPicker extends React.Component {
       </div>
     );
   }
+
 }
 
 module.exports = NoteColorPicker;

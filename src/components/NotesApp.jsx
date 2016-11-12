@@ -4,6 +4,7 @@ import NotesGrid from './NotesGrid.jsx'
 import './NotesApp.css'
 
 class NotesApp extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {notes: []};
@@ -21,6 +22,7 @@ class NotesApp extends React.Component {
     newNotes.unshift(newNote);
     this.setState({notes: newNotes});
   };
+
   handleNoteDelete = (note) => {
     const noteId = note.id;
     const newNotes = this.state.notes.filter(function (note) {
@@ -47,6 +49,7 @@ class NotesApp extends React.Component {
     const notes = JSON.stringify(this.state.notes);
     localStorage.setItem('notes', notes);
   }
+
 }
 
 module.exports = NotesApp;

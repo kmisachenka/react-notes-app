@@ -4,6 +4,12 @@ import Masonry from 'masonry-layout'
 import './NotesGrid.css'
 
 class NotesGrid extends React.Component {
+
+  static propTypes = {
+    notes: React.PropTypes.array,
+    onDelete: React.PropTypes.func,
+  };
+
   componentDidMount() {
     const grid = this.refs.grid;
     this.msnry = new Masonry(grid, {
@@ -38,6 +44,7 @@ class NotesGrid extends React.Component {
       </div>
     );
   }
+
 }
 
 module.exports = NotesGrid;
