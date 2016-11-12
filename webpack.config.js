@@ -1,29 +1,30 @@
 const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
   entry: "./src/main.js",
   output: {
     path: __dirname + "/public/static",
-    publicPath: "build/",
+    publicPath: "static/",
     filename: "bundle.js"
   },
   module: {
     loaders: [
       {
         test: /\.js$/,
-        loader: "babel",
-        exclude: [/node_modules/, /public/],
+        loaders: ["react-hot", "babel"],
+        include: path.join(__dirname, 'src')
 
       },
       {
         test: /\.jsx/,
-        loader: "babel",
-        exclude: [/node_modules/, /public/]
+        loaders: ["react-hot", "babel"],
+        include: path.join(__dirname, 'src')
       },
       {
         test: /\.css$/,
-        loader: "style-loader!css-loader!autoprefixer-loader",
-        exclude: [/node_modules/, /public/]
+        loaders: ["style-loader", "css-loader", "autoprefixer-loader"],
+        include: path.join(__dirname, 'src')
       }
     ]
   }
