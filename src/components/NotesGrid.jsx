@@ -30,7 +30,7 @@ class NotesGrid extends React.Component {
   render() {
     const onDelete = this.props.onDelete;
     return (
-      <div className="notes-grid" ref="grid">
+      <div className='notes-grid' ref='grid'>
         {
           this.props.notes.map(function (note) {
             return <Note

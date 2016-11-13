@@ -37,8 +37,8 @@ class NotesApp extends React.Component {
 
   render() {
     return (
-      <div className="notes-app">
-        <h2 className="app-header">NotesApp</h2>
+      <div className='notes-app'>
+        <h2 className='app-header'>NotesApp</h2>
         <NoteEditor onNoteAdd={this.handleNoteAdd}/>
         <NotesGrid onDelete={this.handleNoteDelete} notes={this.state.notes}/>
       </div>

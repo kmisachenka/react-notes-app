@@ -30,8 +30,8 @@ class NoteColorPicker extends React.Component {
           this.state.colors.map(function (color) {
             return <input
               key={color.id}
-              type="radio"
-              name="color"
+              type='radio'
+              name='color'
               value={color.color}
               onClick={that.handleColorChange}
             />

@@ -42,16 +42,16 @@ class NoteEditor extends React.Component {
 
   render() {
     return (
-      <div className="note-editor">
+      <div className='note-editor'>
         <textarea
-          placeholder="Enter your note here..."
+          placeholder='Enter your note here...'
           rows={5}
-          className="textarea"
+          className='textarea'
           value={this.state.text}
           onChange={this.handleTextChange}
         />
         <NoteColorPicker onColorChange={this.handleColorChange}/>
-        <button className="add-button" onClick={this.handleNoteAdd}>Add</button>
+        <button className='add-button' onClick={this.handleNoteAdd}>Add</button>
       </div>
     );
   }

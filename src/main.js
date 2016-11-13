@@ -4,5 +4,5 @@ import NotesApp from './components/NotesApp'
 
 ReactDOM.render(
   <NotesApp />,
-  document.getElementById("mount-point")
+  document.getElementById('mount-point')
 );
