@@ -44,4 +44,4 @@ class NoteColorPicker extends React.Component {
 
 }
 
-module.exports = NoteColorPicker;
+export default NoteColorPicker;

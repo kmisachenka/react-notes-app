@@ -1,5 +1,5 @@
 import React from 'react'
-import Note from './Note.jsx'
+import Note from './Note'
 import Masonry from 'masonry-layout'
 import './NotesGrid.css'
 
@@ -47,4 +47,4 @@ class NotesGrid extends React.Component {
 
 }
 
-module.exports = NotesGrid;
+export default NotesGrid;

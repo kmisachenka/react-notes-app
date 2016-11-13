@@ -1,5 +1,5 @@
 import React from 'react'
-import NoteColorPicker from './NoteColorPicker.jsx'
+import NoteColorPicker from './NoteColorPicker'
 import Noty from 'noty'
 import './NoteEditor.css'
 
@@ -58,4 +58,4 @@ class NoteEditor extends React.Component {
 
 }
 
-module.exports = NoteEditor;
+export default NoteEditor;

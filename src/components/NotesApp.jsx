@@ -1,6 +1,6 @@
 import React from 'react'
-import NoteEditor from './NoteEditor.jsx'
-import NotesGrid from './NotesGrid.jsx'
+import NoteEditor from './NoteEditor'
+import NotesGrid from './NotesGrid'
 import './NotesApp.css'
 
 class NotesApp extends React.Component {
@@ -52,4 +52,4 @@ class NotesApp extends React.Component {
 
 }
 
-module.exports = NotesApp;
+export default NotesApp;

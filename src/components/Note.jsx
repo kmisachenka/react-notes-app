@@ -21,4 +21,4 @@ class Note extends React.Component {
 
 }
 
-module.exports = Note;
+export default Note;
